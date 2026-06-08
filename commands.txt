@@ -1,0 +1,180 @@
+==================================================
+SAPIENTIA CONSULTING
+LOCAL DEVELOPMENT SETUP
+==================================================
+
+PREREQUISITES
+--------------------------------------------------
+
+1. Install Node.js (v20 or later)
+
+Check if Node is installed:
+
+node --version
+
+If not installed:
+
+https://nodejs.org
+
+Or using Homebrew:
+
+brew install node
+
+
+2. Verify npm
+
+npm --version
+
+
+==================================================
+PROJECT SETUP (RUN ONCE)
+==================================================
+
+1. Open Terminal
+
+2. Navigate to the project root
+
+cd ~/Desktop/Sapientia-Consulting
+
+
+--------------------------------------------------
+BACKEND SETUP
+--------------------------------------------------
+
+cd portal/backend
+
+npm install
+
+
+--------------------------------------------------
+FRONTEND SETUP
+--------------------------------------------------
+
+cd ../../frontend
+
+npm install
+
+
+==================================================
+RUN THE APPLICATION
+==================================================
+
+Open TWO terminals.
+
+
+--------------------------------------------------
+TERMINAL 1 - BACKEND
+--------------------------------------------------
+
+cd ~/Desktop/Sapientia-Consulting/portal/backend
+
+npm run dev
+
+
+Expected output:
+
+[SERVER] Sapientia API running on http://localhost:3000
+
+(or similar server startup message)
+
+
+--------------------------------------------------
+TERMINAL 2 - FRONTEND
+--------------------------------------------------
+
+cd ~/Desktop/Sapientia-Consulting/frontend
+
+npm run dev
+
+
+Expected output:
+
+VITE ready
+
+Local: http://localhost:5173/
+
+
+==================================================
+ACCESS THE WEBSITE
+==================================================
+
+Open:
+
+http://localhost:5173
+
+
+==================================================
+IF A PORT IS ALREADY IN USE
+==================================================
+
+Kill backend port:
+
+lsof -ti :3000 | xargs kill -9
+
+
+Kill frontend port:
+
+lsof -ti :5173 | xargs kill -9
+
+
+Then restart both servers.
+
+
+==================================================
+OPEN IN VS CODE
+==================================================
+
+From the project root:
+
+cd ~/Desktop/Sapientia-Consulting
+
+code .
+
+
+Then open two VS Code terminals:
+
+Terminal A:
+
+cd portal/backend
+npm run dev
+
+
+Terminal B:
+
+cd frontend
+npm run dev
+
+
+==================================================
+PROJECT STRUCTURE
+==================================================
+
+Sapientia-Consulting/
+
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
+├── portal/
+│   └── backend/
+│       ├── server.js
+│       └── package.json
+│
+└── Documentation/
+
+
+==================================================
+STOPPING THE APPLICATION
+==================================================
+
+Press:
+
+CTRL + C
+
+in each terminal window.
+
+
+==================================================
+END
+==================================================

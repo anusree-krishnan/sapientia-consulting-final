@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Syne:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* ── Palette ───────────────────────────────────────── */
+  --ink:        #1a2e1a;        /* deep forest — primary text */
+  --ink-1:      #1f361f;
+  --ink-2:      #2d4a2d;
+  --ink-3:      #3d5c3d;
+  --ink-4:      #6b856b;
+
+  --gold:       #8a6c2e;        /* warm amber — accent */
+  --gold-dim:   #a07c38;
+  --gold-pale:  #d4b87a;
+
+  --cream:      #f7f3eb;        /* warm ivory — main bg */
+  --cream-2:    #ede6d6;        /* section bg variation */
+  --cream-3:    #e0d8c8;        /* borders, dividers */
+
+  --green:      #2d5a2d;        /* forest green — hero bg */
+  --green-2:    #1e3d1e;        /* darker hero */
+  --green-light:#e8f0e8;        /* tinted surface */
+
+  --white:      #ffffff;
+
+  /* ── Typography ────────────────────────────────────── */
+  --font-d: 'Cormorant Garamond', Georgia, serif;
+  --font-u: 'Syne', system-ui, sans-serif;
+
+  /* ── Layout ────────────────────────────────────────── */
+  --nav-h:  72px;
+  --pad:    clamp(4rem, 9vw, 8rem);
+  --wrap:   1180px;
+  --ease:   cubic-bezier(0.19, 1, 0.22, 1);
+  --ease2:  cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ── Shadows ───────────────────────────────────────── */
+  --shadow-sm:  0 2px 8px rgba(26,46,26,0.08);
+  --shadow-md:  0 8px 32px rgba(26,46,26,0.12);
+  --shadow-lg:  0 24px 64px rgba(26,46,26,0.16);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-u);
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── Subtle grain overlay ──────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; outline: none; }
+
+/* ── Scroll reveal ─────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.35s; }
+.reveal-delay-4 { transition-delay: 0.5s; }
+
+/* ── Decorative rule ───────────────────────────────── */
+.rule {
+  display: block;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+  transform-origin: left;
+}
+.rule--center {
+  background: linear-gradient(90deg, transparent 0%, var(--gold) 50%, transparent 100%);
+}
+
+/* ── Label chip ────────────────────────────────────── */
+.label {
+  font-family: var(--font-u);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ── Wrapper ───────────────────────────────────────── */
+.wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 3rem);
+}
+
+/* ── Keyframes ─────────────────────────────────────── */
+@keyframes fadeIn   { from { opacity: 0 } to { opacity: 1 } }
+@keyframes slideUp  { from { opacity: 0; transform: translateY(40px) } to { opacity: 1; transform: none } }
+@keyframes lineGrow { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+@keyframes shimmer  { 0%,100% { opacity: 0.6 } 50% { opacity: 1 } }
+@keyframes spin     { to { transform: rotate(360deg) } }
+
+/* ── Form fields ───────────────────────────────────── */
+.field {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--cream-3);
+  color: var(--ink);
+  font-family: var(--font-u);
+  font-size: 0.95rem;
+  padding: 0.8rem 0;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.field::placeholder { color: var(--ink-4); }
+.field:focus { border-bottom-color: var(--gold); }
+.field--error { border-bottom-color: #b85c5c !important; }
+textarea.field { resize: vertical; min-height: 120px; }
+
+/* ── Buttons ───────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 2.25rem;
+  font-family: var(--font-u);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: 0;
+  transition: all 0.35s var(--ease);
+  cursor: pointer;
+}
+.btn--gold {
+  background: var(--green);
+  color: var(--white);
+  border: 1px solid var(--green);
+}
+.btn--gold:hover {
+  background: var(--green-2);
+  border-color: var(--green-2);
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink-3);
+}
+.btn--ghost:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+.btn--ghost-light {
+  background: transparent;
+  color: var(--cream);
+  border: 1px solid rgba(247,243,235,0.4);
+}
+.btn--ghost-light:hover {
+  border-color: var(--cream);
+  color: var(--cream);
+}
+
+/* ── Section spacing ───────────────────────────────── */
+.section { padding-block: var(--pad); }
+.section--tinted { background: var(--cream-2); }
+.section--green  { background: var(--green);   color: var(--cream); }
+.section--dark   { background: var(--ink);      color: var(--cream); }
+
+/* ── Section header ────────────────────────────────── */
+.section-head { margin-bottom: 3.5rem; }
+.section-head h2 {
+  font-family: var(--font-d);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.12;
+  color: var(--ink);
+  margin-top: 0.6rem;
+}
+.section-head--light h2 { color: var(--cream); }
+.section-head p {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: var(--ink-4);
+  max-width: 520px;
+  line-height: 1.75;
+}
+.section-head--light p { color: rgba(247,243,235,0.7); }
+
+/* ── Divider ───────────────────────────────────────── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--cream-3);
+  margin: 0;
+}
